@@ -10,6 +10,8 @@ import ru.osipov.moneytransfer.model.CardsData;
 import ru.osipov.moneytransfer.model.ConfirmationData;
 import ru.osipov.moneytransfer.model.OperationID;
 
+import java.util.Calendar;
+
 @Service
 public class MoneyTransferService {
     private final Logger logger = Logger.getInstance();
@@ -30,6 +32,8 @@ public class MoneyTransferService {
             throw new ErrorInputData(cardsData.toString());
         }
 
+        if (isCardOverdue(cardsData.getCardFromValidTill())) throw new ErrorInputData(cardsData.toString());
+
         //Глупая проверка в этом месте этого никогда не произойдет
         if (cardsData == null) throw new ErrorTransfer(null);
 
@@ -38,6 +42,21 @@ public class MoneyTransferService {
                 + "-" + RandomStringUtils.randomNumeric(5));
         logger.log("Service создал OperationID: " + opId.toString());
         return opId;
+    }
+
+    private static boolean isCardOverdue(String cardData) {
+        //получим два последних символа строки, т.е. год
+        var yearOnCard = Integer.parseInt(cardData.substring(cardData.length() - 2));
+        var yearOnNow = Calendar.getInstance().get(Calendar.YEAR) - 2000;
+
+        if (yearOnNow > yearOnCard) return true;
+
+        if (yearOnNow == yearOnCard) {
+            var monthOnCard = Integer.parseInt(cardData.substring(0,2));
+            var monthOnNow = Calendar.getInstance().get(Calendar.MONTH) + 1;
+            return monthOnNow > monthOnCard;
+        }
+        return false;
     }
 
     public OperationID confirmOperation(ConfirmationData confirmationData) {
@@ -54,6 +73,7 @@ public class MoneyTransferService {
         logger.log("Service подтверждает OperationID: " + opId.toString());
         return tmp;
     }
+
     private boolean isEmpty(String str) {
         return str == null || str.isEmpty();
     }

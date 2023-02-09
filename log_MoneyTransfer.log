@@ -163,3 +163,75 @@
 8. [Thu Feb 09 17:45:01 MSK 2023] Service подтверждает OperationID: OperationId{operationId='42045-2624176414-31987'}
 9. [Thu Feb 09 17:45:01 MSK 2023] Controller принял подтвержденный OperationID: OperationId{operationId='42045-2624176414-31987'}
 10. [Thu Feb 09 17:45:01 MSK 2023] [31mПеревод 1234567 рублей с карты 2645673573567356 на карту 5665336534573457 произведен успешно. Была взята комиссия в размере 12345.67 рублей
+
+ЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:
+1. [Thu Feb 09 18:26:05 MSK 2023] Запустается MoneyTransferApplication
+2. [Thu Feb 09 18:26:46 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+3. [Thu Feb 09 18:26:46 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+4. [Thu Feb 09 18:26:46 MSK 2023] Service создал OperationID: OperationId{operationId='65987-1861715511-67582'}
+5. [Thu Feb 09 18:26:46 MSK 2023] Controller принял OperationID: OperationId{operationId='65987-1861715511-67582'}
+6. [Thu Feb 09 18:30:21 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+7. [Thu Feb 09 18:30:21 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+8. [Thu Feb 09 18:30:21 MSK 2023] Service создал OperationID: OperationId{operationId='85256-5539492564-73150'}
+9. [Thu Feb 09 18:30:21 MSK 2023] Controller принял OperationID: OperationId{operationId='85256-5539492564-73150'}
+10. [Thu Feb 09 18:31:33 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/12', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+11. [Thu Feb 09 18:31:33 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/12', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+12. [Thu Feb 09 18:31:33 MSK 2023] Service создал OperationID: OperationId{operationId='24584-6762606702-14950'}
+13. [Thu Feb 09 18:31:33 MSK 2023] Controller принял OperationID: OperationId{operationId='24584-6762606702-14950'}
+
+ЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:
+1. [Thu Feb 09 22:39:25 MSK 2023] Запустается MoneyTransferApplication
+2. [Thu Feb 09 22:39:38 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/12', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+3. [Thu Feb 09 22:39:38 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/12', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+
+ЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:
+1. [Thu Feb 09 22:42:12 MSK 2023] Запустается MoneyTransferApplication
+2. [Thu Feb 09 22:42:18 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+3. [Thu Feb 09 22:42:18 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+4. [Thu Feb 09 22:42:30 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+5. [Thu Feb 09 22:42:30 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+
+ЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:
+1. [Thu Feb 09 22:42:46 MSK 2023] Запустается MoneyTransferApplication
+2. [Thu Feb 09 22:42:53 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+3. [Thu Feb 09 22:42:53 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+
+ЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:
+1. [Thu Feb 09 22:45:21 MSK 2023] Запустается MoneyTransferApplication
+2. [Thu Feb 09 22:45:29 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+3. [Thu Feb 09 22:45:29 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/24', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+4. [Thu Feb 09 22:45:29 MSK 2023] Service создал OperationID: OperationId{operationId='17293-6700969652-28310'}
+5. [Thu Feb 09 22:45:29 MSK 2023] Controller принял OperationID: OperationId{operationId='17293-6700969652-28310'}
+6. [Thu Feb 09 22:45:34 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/12', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+7. [Thu Feb 09 22:45:34 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='12/12', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+8. [Thu Feb 09 22:45:34 MSK 2023] Че-то с картой не то
+9. [Thu Feb 09 22:46:04 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='02/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+10. [Thu Feb 09 22:46:04 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='02/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+11. [Thu Feb 09 22:46:04 MSK 2023] Service создал OperationID: OperationId{operationId='72811-9701897351-11255'}
+12. [Thu Feb 09 22:46:04 MSK 2023] Controller принял OperationID: OperationId{operationId='72811-9701897351-11255'}
+13. [Thu Feb 09 22:46:11 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+14. [Thu Feb 09 22:46:11 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+15. [Thu Feb 09 22:46:11 MSK 2023] Че-то с картой не то
+16. [Thu Feb 09 22:46:23 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='02/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+17. [Thu Feb 09 22:46:23 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='02/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+18. [Thu Feb 09 22:46:23 MSK 2023] Service создал OperationID: OperationId{operationId='21073-8334977108-81447'}
+19. [Thu Feb 09 22:46:23 MSK 2023] Controller принял OperationID: OperationId{operationId='21073-8334977108-81447'}
+20. [Thu Feb 09 22:46:31 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+21. [Thu Feb 09 22:46:31 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+22. [Thu Feb 09 22:46:31 MSK 2023] Че-то с картой не то
+23. [Thu Feb 09 22:46:36 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='03/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+24. [Thu Feb 09 22:46:36 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='03/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+25. [Thu Feb 09 22:46:36 MSK 2023] Service создал OperationID: OperationId{operationId='71869-9076292489-07702'}
+26. [Thu Feb 09 22:46:36 MSK 2023] Controller принял OperationID: OperationId{operationId='71869-9076292489-07702'}
+27. [Thu Feb 09 22:46:42 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='03/22', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+28. [Thu Feb 09 22:46:42 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='03/22', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+29. [Thu Feb 09 22:46:42 MSK 2023] Че-то с картой не то
+30. [Thu Feb 09 22:47:33 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+31. [Thu Feb 09 22:47:33 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='2342341325345324', amount=Amount{value=200000, currency='RUR'}}
+32. [Thu Feb 09 22:47:33 MSK 2023] Че-то с картой не то
+33. [Thu Feb 09 22:48:38 MSK 2023] Получили исходные сведения с фронта: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='', amount=Amount{value=200000, currency='RUR'}}
+34. [Thu Feb 09 22:48:38 MSK 2023] Service принял данные карт: CardToCardInfo{cardFromNumber='1224342314123412', cardFromValidTill='01/23', cardFromCVV='123', cardToNumber='', amount=Amount{value=200000, currency='RUR'}}
+35. [Thu Feb 09 22:48:38 MSK 2023] Че-то с картой не то
+
+ЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:
+1. [Thu Feb 09 22:51:58 MSK 2023] Запустается MoneyTransferApplication
