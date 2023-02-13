@@ -44,7 +44,7 @@ public class MoneyTransferService {
         return opId;
     }
 
-    private static boolean isCardOverdue(String cardData) {
+    public static boolean isCardOverdue(String cardData) {
         //получим два последних символа строки, т.е. год
         var yearOnCard = Integer.parseInt(cardData.substring(cardData.length() - 2));
         var yearOnNow = Calendar.getInstance().get(Calendar.YEAR) - 2000;

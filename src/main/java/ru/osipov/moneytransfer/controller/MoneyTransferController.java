@@ -17,6 +17,8 @@ public class MoneyTransferController {
     private final Logger logger = Logger.getInstance();
     MoneyTransferService service;
     public static final String ANSI_RED = "\u001B[31m";
+
+    //Следующие три переменные необходимы для последнего сообщения логгера
     private String fromCard;
     private String toCard;
     private int value;
