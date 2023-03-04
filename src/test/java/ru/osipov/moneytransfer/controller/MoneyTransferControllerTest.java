@@ -5,7 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.osipov.moneytransfer.model.CardsData;
+import org.springframework.http.ResponseEntity;
+import ru.osipov.moneytransfer.model.TransferData;
 import ru.osipov.moneytransfer.model.ConfirmationData;
 import ru.osipov.moneytransfer.model.OperationID;
 
@@ -15,18 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MoneyTransferControllerTest {
 
     @Mock
-    CardsData cardsData;
+    TransferData transferData;
     @Mock
     MoneyTransferController mtc;
     @Mock
-    OperationID operationID;
+    ResponseEntity<OperationID> operationID;
     @Mock
     ConfirmationData confirmationData;
 
     @Test
     void requestToTransfer() {
-        Mockito.doReturn(operationID).when(mtc).requestToTransfer(cardsData);
-        assertEquals(operationID, mtc.requestToTransfer(cardsData));
+        Mockito.doReturn(operationID).when(mtc).requestToTransfer(transferData);
+        assertEquals(operationID, mtc.requestToTransfer(transferData));
     }
 
     @Test

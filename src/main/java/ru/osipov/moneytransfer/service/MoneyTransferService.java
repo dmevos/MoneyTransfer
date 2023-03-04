@@ -1,47 +1,84 @@
 package ru.osipov.moneytransfer.service;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import ru.osipov.moneytransfer.exception.ErrorConfirmation;
 import ru.osipov.moneytransfer.exception.ErrorInputData;
 import ru.osipov.moneytransfer.exception.ErrorTransfer;
 import ru.osipov.moneytransfer.logger.Logger;
-import ru.osipov.moneytransfer.model.CardsData;
+import ru.osipov.moneytransfer.model.Card;
 import ru.osipov.moneytransfer.model.ConfirmationData;
 import ru.osipov.moneytransfer.model.OperationID;
+import ru.osipov.moneytransfer.model.TransferData;
+import ru.osipov.moneytransfer.repository.CardRepository;
+import ru.osipov.moneytransfer.repository.TransferRepository;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 @Service
 public class MoneyTransferService {
     private final Logger logger = Logger.getInstance();
-    private OperationID opId;
-
+    private final CardRepository cardRepository;
+    private final TransferRepository transferRepository;
+    public static final String ANSI_RED = "\u001B[31m";
 
     final String CODE = "0000"; //Это проверочный код. Будем сверять в confirmOperation
 
-    public MoneyTransferService() {
+    public MoneyTransferService(CardRepository cardRepository, TransferRepository transferRepository) {
+        this.cardRepository = cardRepository;
+        this.transferRepository = transferRepository;
     }
 
-    public OperationID getOperationId(CardsData cardsData) {
-        logger.log("Service принял данные карт: " + cardsData.toString());
-     /*   Хоть на фронте и стоит проверка отправки валидных значений, все равно проверим.
-        Вдруг на сервере будут еще какие нибудь дополнительные критерии */
-        if (isEmpty(cardsData.getCardFromNumber()) || isEmpty(cardsData.getCardFromCVV()) ||
-                isEmpty(cardsData.getCardFromValidTill()) || isEmpty(cardsData.getCardToNumber())) {
-            throw new ErrorInputData(cardsData.toString());
+    public OperationID getOperationId(TransferData transferData) {
+        logger.log("Service принял данные карт: " + transferData.toString());
+
+        var cardFromNum = transferData.getCardFromNumber();
+        Card existingCardFrom = cardRepository.getCardByNumber(cardFromNum).orElseThrow(
+                () -> new ErrorTransfer("Карта с номером " + cardFromNum + " не найдена")
+                //по идее можно добавлять эту карту в репозиторий, но я считаю,
+                // что это совсем не обязательно при решении поставленной задачи
+        );
+
+        var validTillIsCorrect = Objects.equals(existingCardFrom.getValidTill(), transferData.getCardFromValidTill());
+        var cvvIsCorrect = Objects.equals(existingCardFrom.getCvv(), transferData.getCardFromCVV());
+        if (!validTillIsCorrect || !cvvIsCorrect) {
+            throw new ErrorInputData("Введены неверные данные карты (срок действия / CVV номер)");
         }
 
-        if (isCardOverdue(cardsData.getCardFromValidTill())) throw new ErrorInputData(cardsData.toString());
+        if (isCardOverdue(existingCardFrom.getValidTill()))
+            throw new ErrorInputData("Карта с номером " + cardFromNum + " просрочена");
 
-        //Глупая проверка в этом месте этого никогда не произойдет
-        if (cardsData == null) throw new ErrorTransfer(null);
+        logger.log("Все данные карт корректны. Будем создавать OperationId...");
 
-        opId = new OperationID(RandomStringUtils.randomNumeric(5)
-                + "-" + RandomStringUtils.randomNumeric(10)
-                + "-" + RandomStringUtils.randomNumeric(5));
-        logger.log("Service создал OperationID: " + opId.toString());
-        return opId;
+        return transferRepository.addTransfer(transferData);
+    }
+
+    public OperationID confirmOperation(ConfirmationData confirmationData) {
+        logger.log("Service принял confirmationData: " + confirmationData.toString());
+
+        var opId = confirmationData.getOperationId();
+
+        if (!transferRepository.confirmOperation(confirmationData))
+            throw new ErrorConfirmation("Опереция с ID: " + opId + " отсутствует");
+
+        if (!Objects.equals(CODE, confirmationData.getCode()))
+            throw new ErrorConfirmation("Неверный код подтверждения");
+
+        if (isEmpty(confirmationData.getCode()) || isEmpty(opId))
+            throw new ErrorInputData(confirmationData.toString());
+
+        var tmp = new OperationID(opId);
+        var transfer = transferRepository.getTransferDataById(opId);
+        var tmpStr = String.format(ANSI_RED + "Перевод %s рублей с карты %s на карту %s произведен успешно. " +
+                        "Была взята комиссия в размере %s рублей\n",
+                transfer.getAmount().getValue() / 100,
+                transfer.getCardFromNumber(),
+                transfer.getCardToNumber(),
+                transfer.getAmount().getValue() / 10000
+        );
+        logger.log(tmpStr);
+
+        return tmp;
     }
 
     public static boolean isCardOverdue(String cardData) {
@@ -52,26 +89,11 @@ public class MoneyTransferService {
         if (yearOnNow > yearOnCard) return true;
 
         if (yearOnNow == yearOnCard) {
-            var monthOnCard = Integer.parseInt(cardData.substring(0,2));
+            var monthOnCard = Integer.parseInt(cardData.substring(0, 2));
             var monthOnNow = Calendar.getInstance().get(Calendar.MONTH) + 1;
             return monthOnNow > monthOnCard;
         }
         return false;
-    }
-
-    public OperationID confirmOperation(ConfirmationData confirmationData) {
-        logger.log("Service принял confirmationData: " + confirmationData.toString());
-
-        if (!(opId.getOperationId().equals(confirmationData.getOperationId()) &&
-                CODE.equals(confirmationData.getCode())))
-            throw new ErrorConfirmation(confirmationData);
-
-        if (isEmpty(confirmationData.getCode()) || isEmpty(confirmationData.getOperationId()))
-            throw new ErrorInputData(confirmationData.toString());
-
-        var tmp = new OperationID(confirmationData.getOperationId());
-        logger.log("Service подтверждает OperationID: " + opId.toString());
-        return tmp;
     }
 
     private boolean isEmpty(String str) {

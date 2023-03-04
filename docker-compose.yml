@@ -1,0 +1,9 @@
+version: '1.0'
+
+services:
+  backend:
+    container_name: transfer_money
+    build: ./
+    image: 'transfer_money:latest'
+    ports:
+      - '5500:5500'

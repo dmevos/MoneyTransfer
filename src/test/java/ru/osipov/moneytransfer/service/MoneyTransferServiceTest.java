@@ -5,19 +5,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.osipov.moneytransfer.model.CardsData;
-import ru.osipov.moneytransfer.model.ConfirmationData;
-import ru.osipov.moneytransfer.model.OperationID;
+import ru.osipov.moneytransfer.model.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static ru.osipov.moneytransfer.service.MoneyTransferService.isCardOverdue;
 
 @ExtendWith(MockitoExtension.class)
 class MoneyTransferServiceTest {
+
     @Mock
-    MoneyTransferService mts;
+    MoneyTransferService moneyTransferService;
     @Mock
-    CardsData cardsData;
+    TransferData transferData;
 
     @Mock
     OperationID operationID;
@@ -26,14 +25,14 @@ class MoneyTransferServiceTest {
 
     @Test
     void testGetOperationId() {
-        Mockito.doReturn(operationID).when(mts).getOperationId(cardsData);
-        assertEquals(operationID, mts.getOperationId(cardsData));
+        Mockito.doReturn(operationID).when(moneyTransferService).getOperationId(transferData);
+        assertEquals(operationID, moneyTransferService.getOperationId(transferData));
     }
 
     @Test
     void testConfirmOperation() {
-        Mockito.doReturn(operationID).when(mts).confirmOperation(confirmationData);
-        assertEquals(operationID, mts.confirmOperation(confirmationData));
+        Mockito.doReturn(operationID).when(moneyTransferService).confirmOperation(confirmationData);
+        assertEquals(operationID, moneyTransferService.confirmOperation(confirmationData));
     }
 
     @Test

@@ -13,19 +13,19 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(ErrorInputData.class)
     public ResponseEntity<ErrorClass> handleInputData(ErrorInputData e) {
-        logger.log("Че-то с картой не то");
-        return new ResponseEntity<>(new ErrorClass("Чето с картой не то", 1), HttpStatus.BAD_REQUEST);
+        logger.log("Чето с картой не то: " + e.getMessage());
+        return new ResponseEntity<>(new ErrorClass("Чето с картой не то: " + e.getMessage(), 1), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ErrorTransfer.class)
     public ResponseEntity<ErrorClass> handleErrorTransfer(ErrorTransfer e) {
-        logger.log("Че-то не так со связью");
-        return new ResponseEntity<>(new ErrorClass("Че-то не так со связью", 2), HttpStatus.INTERNAL_SERVER_ERROR);
+        logger.log("Че-то не так со связью: " + e.getMessage());
+        return new ResponseEntity<>(new ErrorClass("Че-то не так со связью: " + e.getMessage(), 2), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(ErrorConfirmation.class)
     public ResponseEntity<ErrorClass> handleErrorConfirmation(ErrorConfirmation e) {
-        logger.log("Обмануть пытаетесь?");
-        return new ResponseEntity<>(new ErrorClass("Обмануть пытаетесь?", 2), HttpStatus.INTERNAL_SERVER_ERROR);
+        logger.log("Обмануть пытаетесь?" + e.getMessage());
+        return new ResponseEntity<>(new ErrorClass("Обмануть пытаетесь? ", 3), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
