@@ -7,10 +7,47 @@
 	},
 	"item": [
 		{
-			"name": "Transfer1",
+			"name": "Transfer1_AllOk",
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cardFromNumber\":\"1111666677778888\",\r\n\"cardToNumber\":\"2222666677778888\",\r\n\"cardFromCVV\":\"111\",\r\n\"cardFromValidTill\":\"01/25\",\r\n\"amount\":{\"currency\":\"RUR\",\"value\":200000}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5500/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5500",
+					"path": [
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer1_NoNumberInBase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cardFromNumber\":\"1224342314123412\",\r\n\"cardToNumber\":\"2342341325345324\",\r\n\"cardFromCVV\":\"123\",\r\n\"cardFromValidTill\":\"12/24\",\r\n\"amount\":{\"currency\":\"RUR\",\"value\":200000}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:5500/transfer",
 					"protocol": "http",
@@ -32,7 +69,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"cardFromNumber\":\"1224342314123412\",\r\n\"cardToNumber\":\"2342341325345324\",\r\n\"cardFromCVV\":\"123\",\r\n\"cardFromValidTill\":\"12/12\",\r\n\"amount\":{\"currency\":\"RUR\",\"value\":200000}}",
+					"raw": "{\"cardFromNumber\":\"5555666677778888\",\r\n\"cardToNumber\":\"2342341325345324\",\r\n\"cardFromCVV\":\"555\",\r\n\"cardFromValidTill\":\"05/22\",\r\n\"amount\":{\"currency\":\"RUR\",\"value\":200000}}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -58,6 +95,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"cardFromNumber\":\"1224342314123412\",\r\n\"cardToNumber\":\"\",\r\n\"cardFromCVV\":\"123\",\r\n\"cardFromValidTill\":\"01/23\",\r\n\"amount\":{\"currency\":\"RUR\",\"value\":200000}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:5500/transfer",
 					"protocol": "http",
@@ -86,6 +132,90 @@
 					"port": "5500",
 					"path": [
 						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm_AllOk",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"operationId\":\"111\",\r\n\"code\":\"0000\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5500/confirmOperation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5500",
+					"path": [
+						"confirmOperation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm_NotOkCode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"operationId\":\"111\",\r\n\"code\":\"0010\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5500/confirmOperation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5500",
+					"path": [
+						"confirmOperation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm_NotOkID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"operationId\":\"112\",\r\n\"code\":\"0000\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5500/confirmOperation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5500",
+					"path": [
+						"confirmOperation"
 					]
 				}
 			},
