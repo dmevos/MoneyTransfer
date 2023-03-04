@@ -2,6 +2,9 @@ package ru.osipov.moneytransfer.logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 public class Logger {
@@ -17,7 +20,7 @@ public class Logger {
     public static Logger getInstance() {
         if (instance == null) {
             instance = new Logger();
-            try (FileWriter fw = new FileWriter(LOG_FILE_NAME, true)) {
+            try (FileWriter fw = new FileWriter(LOG_FILE_NAME, StandardCharsets.UTF_8, true)) {
                 fw.write("\nЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:\n");
                 System.out.print(ANSI_BLUE + "ЛОГ РАБОТЫ СЕРВЕРА ПО ПЕРЕВОДУ ДЕНЕГ С КАРТЫ НА КАРТУ:\n" + ANSI_RESET);
             } catch (IOException ex) {

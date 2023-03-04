@@ -6,4 +6,4 @@ services:
     build: ./
     image: 'transfer_money:latest'
     ports:
-      - '5500:5500'
+     - '5500:5500'

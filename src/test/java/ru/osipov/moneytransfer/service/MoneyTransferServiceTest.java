@@ -39,7 +39,7 @@ class MoneyTransferServiceTest {
     void testIsCardOverdue() {
         assertTrue(isCardOverdue("12/22"));
         assertTrue(isCardOverdue("01/23"));
-        assertFalse(isCardOverdue("02/23"));
+        assertFalse(isCardOverdue("03/23"));
         assertFalse(isCardOverdue("12/23"));
     }
 }

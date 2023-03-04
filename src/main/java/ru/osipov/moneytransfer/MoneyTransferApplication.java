@@ -9,7 +9,7 @@ public class MoneyTransferApplication {
     static final Logger logger = Logger.getInstance();
 
     public static void main(String[] args) {
-        logger.log("Запустается MoneyTransferApplication");
+        logger.log("Запускается MoneyTransferApplication");
         SpringApplication.run(MoneyTransferApplication.class, args);
     }
 }
